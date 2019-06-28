@@ -1,8 +1,8 @@
-apiVersion: skaffold/v1beta2
+apiVersion: skaffold/v1beta11
 kind: Config
 build:
   artifacts:
-  - image: freeo/dago
+  - image: dev-infra-240819/dago
     context: .
     docker: {}
   tagPolicy:
@@ -15,8 +15,12 @@ profiles:
 - name: dev
   build:
     tagPolicy:
-      envTemplate:
-        template: '{{.DOCKER_REGISTRY}}/{{.IMAGE_NAME}}:{{.DIGEST_HEX}}'
+        sha256: {}
+    artifacts:
+    - image: eu.gcr.io/dev-infra-240819/dago
+    # tagPolicy:
+      # envTemplate:
+      #   template: '{{.DOCKER_REGISTRY}}/{{.IMAGE_NAME}}:{{.DIGEST_HEX}}'
     local: {}
   deploy:
     helm:
@@ -25,4 +29,4 @@ profiles:
         chartPath: charts/dago
         setValueTemplates:
           image.repository: '{{.DOCKER_REGISTRY}}/{{.IMAGE_NAME}}'
-          image.tag: '{{.DIGEST_HEX}}'
+          image.tag: '{{.DIGEST}}'
