@@ -6,7 +6,7 @@ pipeline {
     ORG = 'freeo'
     APP_NAME = 'dago'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
-    DOCKER_REGISTRY_ORG = 'freeo'
+    DOCKER_REGISTRY_ORG = 'dev-infra-240819'
   }
   stages {
     stage('CI Build and push snapshot') {
