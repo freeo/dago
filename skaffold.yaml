@@ -2,7 +2,7 @@ apiVersion: skaffold/v1beta11
 kind: Config
 build:
   artifacts:
-  - image: dev-infra-240819/dago
+  - image: dago
     context: .
     docker: {}
   tagPolicy:
@@ -17,7 +17,8 @@ profiles:
     tagPolicy:
         sha256: {}
     artifacts:
-    - image: eu.gcr.io/dev-infra-240819/dago
+    - image: '{{.DOCKER_REGISTRY}}/{{.IMAGE_NAME}}'
+    # - image: eu.gcr.io/dev-infra-240819/dago
     # tagPolicy:
       # envTemplate:
       #   template: '{{.DOCKER_REGISTRY}}/{{.IMAGE_NAME}}:{{.DIGEST_HEX}}'
